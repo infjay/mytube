@@ -13,7 +13,7 @@ const ChannelDetail = () => {
  
   useEffect(()=> {
     fetchFromAPI(`channels?part="snippet&id=${id}`)
-      .then((data)=> setChannelDetail(data?.items[0]))
+      .then((data)=> setChannelDetail(data?.items?.[0]))
 
     fetchFromAPI(`search?channelId=${id}part="snippet&order=date`)
       .then((data)=> setVideos(data?.items))
@@ -21,8 +21,18 @@ const ChannelDetail = () => {
   return (
     <Box minHeight="95vh">
       <Box>
-        <div />
+        <div style={{background:'linear-gradient(90deg,rgba(14,15,0,1) 0%, rgba(255,30,10,1)33%, rgba(0,255,231,1) 71%)',
+        zIndex:10,
+        height:'300px'  
+      }} 
+     />
+          <ChannelCard channelDetail={channelDetail} marginTop="-120px"  />
       </Box>
+        <Box display="flex" p="2">
+          <Box sx={{ mr: { sm:"100px" } }} >
+            <Videos videos={videos} />
+          </Box>
+        </Box>
     </Box>
   )
 }
